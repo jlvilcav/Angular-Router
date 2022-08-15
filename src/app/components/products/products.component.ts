@@ -19,6 +19,8 @@ export class ProductsComponent implements OnInit {
   today = new Date();
   date = new Date(2021,1,20);
 
+  showProductDetail = false;
+
   constructor(
     private storeService: StoreService,
     private productsService: ProductsService
@@ -36,6 +38,17 @@ export class ProductsComponent implements OnInit {
   onAddToShoppingCart(product: Product) {
     this.storeService.addProduct(product);
     this.total =  this.storeService.getTotal();
+  }
+
+  toggleProductDetail(){
+    this.showProductDetail = !this.showProductDetail;
+  }
+
+  onShowDetail(id: string){
+    this.productsService.getProduct(id)
+    .subscribe(data => {
+      console.log('product',data);
+    });
   }
 
 }
