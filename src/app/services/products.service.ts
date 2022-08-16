@@ -31,4 +31,8 @@ export class ProductsService {
     //Put envía toda la información del producto, todo los campos
     //patch solo envía los campos que se quieren actualizar
   }
+
+  delete(id: string){
+    return this.http.delete<boolean>(`${this.apiUrl}/${id}`);
+  }
 }
