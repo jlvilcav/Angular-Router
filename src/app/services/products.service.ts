@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Product, CreateProductDTO } from '../models/product.model';
+import { Product, CreateProductDTO, UpdateProductDTO } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +24,11 @@ export class ProductsService {
 
   create(dto: CreateProductDTO){
     return this.http.post<Product>(this.apiUrl, dto);
+  }
+
+  update(id: string, dto:UpdateProductDTO){
+    return this.http.put<Product>(`${this.apiUrl}/${id}`, dto);
+    //Put envía toda la información del producto, todo los campos
+    //patch solo envía los campos que se quieren actualizar
   }
 }
