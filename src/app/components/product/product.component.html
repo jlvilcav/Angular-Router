@@ -3,6 +3,7 @@
   {{product.price | currency:'SOL ':true}}
 </h2>
 <p>{{product.title}}</p>
+<p *ngIf="product.taxes">{{product.taxes | currency:'SOL ':true}}</p>
 <!-- <p appHighlight>{{product.description}}</p> -->
 <!-- <p>{{product.title | reverse}}</p> -->
 <button (click)="onShowDetail()">View Detail</button>
