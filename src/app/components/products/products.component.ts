@@ -63,7 +63,7 @@ export class ProductsComponent implements OnInit {
 
   onShowDetail(id: string){
     this.statusDetail = 'loading';
-    this.toggleProductDetail();
+    // this.toggleProductDetail();
     this.productsService.getProduct(id)
     .subscribe(data => {
       // console.log('product',data);
