@@ -10,6 +10,7 @@ export class ProductsService {
 
   // private apiUrl: string = 'https://young-sands-07814.herokuppapp.com/api/products';
   private apiUrl: string = 'https://young-sands-07814.herokuapp.com/api/products';
+  // private apiUrl: string = '/api/products';
 
   constructor(
     private http: HttpClient
