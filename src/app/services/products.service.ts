@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { Product, CreateProductDTO, UpdateProductDTO } from '../models/product.model';
-import { retry } from 'rxjs/operators';
+import { retry, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 import { environment} from './../../environments/environment';
 
 @Injectable({
@@ -31,7 +32,18 @@ export class ProductsService {
   }
 
   getProduct(id: string) {
-    return this.http.get<Product>(`${this.apiUrl}/${id}`);
+    return this.http.get<Product>(`${this.apiUrl}/${id}`)
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === HttpStatusCode.InternalServerError) {
+          return throwError('Error en el server');
+        }
+        if (error.status === HttpStatusCode.NotFound) {
+          return throwError('El producto no existe');
+        }
+        return throwError('Error al obtener el producto');
+      })
+    );
   }
 
   getProductsByPage(limit: number, offset: number){
