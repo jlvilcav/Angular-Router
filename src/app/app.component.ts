@@ -37,18 +37,19 @@ export class AppComponent {
     });
   }
 
-  login(){
-    this.authService.login( 'Jorgito@gmail.com','123456')
-    .subscribe(rta => {
-      console.log(rta.access_Token);
-      this.token = rta.access_Token;
-    });
-  }
+  // login(){
+  //   this.authService.login( 'Jorgito@gmail.com','123456')
+  //   .subscribe(rta => {
+  //     console.log(rta.access_token);
+  //     this.token = rta.access_token;
+  //   });
+  // }
 
-  getProfile() {
-    this.authService.profile(this.token)
-    .subscribe(profile => {
-      console.log(profile);
-    });
-  }
+  // getProfile() {
+  //   console.log(this.token);
+  //   this.authService.profile(this.token)
+  //   .subscribe(profile => {
+  //     console.log(profile);
+  //   });
+  // }
 }
