@@ -33,8 +33,8 @@
     </nav>
     <div class="info">
       <div class="account">
-        <button *ngIf="!token; else elseblock" (click)="login()">Login</button>
-        <ng-template #elseblock>{{profile.email}}</ng-template>
+        <button *ngIf="!profile; else elseblock" (click)="login()">Login</button>
+        <ng-template #elseblock>{{profile?.email}}</ng-template>
       </div>
       <div class="">
         <a href="">
