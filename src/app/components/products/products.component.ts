@@ -19,8 +19,7 @@ export class ProductsComponent  {
   today = new Date();
   date = new Date(2021,1,20);
 
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  @Output() onLoadMore: EventEmitter<string> = new EventEmitter();
+  @Output() loadMore: EventEmitter<string> = new EventEmitter();
 
   showProductDetail = false;
   productChosen: Product ={
@@ -140,8 +139,8 @@ export class ProductsComponent  {
     );
   }
 
-  loadMore() {
-    this.onLoadMore.emit();
+  onLoadMore() {
+    this.loadMore.emit();
   }
   // loadMore(){
   //   this.productsService.getProductsByPage(this.limit,this.offset).subscribe(
