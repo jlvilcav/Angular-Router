@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { zip } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ProductsService } from 'src/app/services/products.service';
@@ -18,6 +18,9 @@ export class ProductsComponent  {
   @Input() products: Product[] = [];
   today = new Date();
   date = new Date(2021,1,20);
+
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+  @Output() onLoadMore: EventEmitter<string> = new EventEmitter();
 
   showProductDetail = false;
   productChosen: Product ={
@@ -137,6 +140,9 @@ export class ProductsComponent  {
     );
   }
 
+  loadMore() {
+    this.onLoadMore.emit();
+  }
   // loadMore(){
   //   this.productsService.getProductsByPage(this.limit,this.offset).subscribe(
   //     data => {
