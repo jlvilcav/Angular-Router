@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { zip } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ProductsService } from 'src/app/services/products.service';
@@ -10,14 +10,12 @@ import { StoreService } from '../../services/store.service';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit {
-
-
+export class ProductsComponent  {
 
   myShoppingCart: Product[] = [];
   total: number = 0;
 
-  products: Product[] = [];
+  @Input() products: Product[] = [];
   today = new Date();
   date = new Date(2021,1,20);
 
@@ -33,8 +31,8 @@ export class ProductsComponent implements OnInit {
       name:'',
     }
   };
-  limit = 10;
-  offset = 0;
+  // limit = 10;
+  // offset = 0;
   statusDetail: 'loading' | 'success' | 'error' | 'init' = 'init';
 
   constructor(
@@ -43,14 +41,15 @@ export class ProductsComponent implements OnInit {
   ) {
     this.myShoppingCart = this.storeService.getShoppingCart();
   }
-  ngOnInit(): void {
-    this.productsService.getAllProducts(10,0).subscribe(
-      data => {
-        this.products = data;
-        this.offset += this.limit;
-      }
-    );
-  }
+
+  // ngOnInit(): void {
+  //   this.productsService.getAllProducts(10,0).subscribe(
+  //     data => {
+  //       this.products = data;
+  //       this.offset += this.limit;
+  //     }
+  //   );
+  // }
 
   onAddToShoppingCart(product: Product) {
     this.storeService.addProduct(product);
@@ -138,13 +137,13 @@ export class ProductsComponent implements OnInit {
     );
   }
 
-  loadMore(){
-    this.productsService.getProductsByPage(this.limit,this.offset).subscribe(
-      data => {
-        this.products = this.products.concat(data);
-        this.offset += this.limit;
-      }
-    );
-  }
+  // loadMore(){
+  //   this.productsService.getProductsByPage(this.limit,this.offset).subscribe(
+  //     data => {
+  //       this.products = this.products.concat(data);
+  //       this.offset += this.limit;
+  //     }
+  //   );
+  // }
 
 }
