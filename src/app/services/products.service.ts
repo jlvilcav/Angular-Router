@@ -22,12 +22,26 @@ export class ProductsService {
 
   getAllProducts(limit?: number, offset?: number) {
     let params = new HttpParams();
-    if (limit && offset) {
+    if (limit && offset != null) {
       params = params.set('limit', limit);
       params = params.set('offset', offset);
     }
     return this.http.get<Product[]>(this.apiUrl, { params, context: checkTime() })
     .pipe(
+      retry(3),
+      map(products => products.map(item =>{
+        return {
+          ...item,
+          taxes: .19 * item.price
+        }
+      }))
+    );
+  }
+
+  getProductsByPage(limit: number, offset: number){
+    return this.http.get<Product[]>(`${this.apiUrl}`,{
+      params: {limit, offset}
+    }).pipe(
       retry(3),
       map(products => products.map(item =>{
         return {
@@ -53,19 +67,7 @@ export class ProductsService {
     );
   }
 
-  getProductsByPage(limit: number, offset: number){
-    return this.http.get<Product[]>(`${this.apiUrl}`,{
-      params: {limit, offset}
-    }).pipe(
-      retry(3),
-      map(products => products.map(item =>{
-        return {
-          ...item,
-          taxes: .19 * item.price
-        }
-      }))
-    );
-  }
+
 
   fetchReadAndupdate(id: string, dto: UpdateProductDTO){
     return zip(
