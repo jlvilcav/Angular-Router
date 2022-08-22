@@ -23,7 +23,7 @@ export class AppComponent {
 
 
   onLoaded(img:string) {
-    console.log('log padre ', img);
+    // console.log('log padre ', img);
   }
 
   toggleImg() {
@@ -37,7 +37,7 @@ export class AppComponent {
       password: '123456'
     })
     .subscribe(rta => {
-      console.log(rta);
+      // console.log(rta);
     });
   }
 

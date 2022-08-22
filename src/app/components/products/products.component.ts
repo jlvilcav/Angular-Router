@@ -83,7 +83,7 @@ export class ProductsComponent  {
       switchMap((product) => this.productsService.update(product.id, {title: 'change'}))
     )
     .subscribe(data => {
-      console.log('updated', data);
+      // console.log('updated', data);
       // const productIndex = this.products.findIndex(p => p.id === this.productChosen.id);
       // this.products[productIndex] = data;
       // this.productChosen = data;
@@ -105,7 +105,7 @@ export class ProductsComponent  {
     }
     this.productsService.create(product)
     .subscribe(data => {
-      console.log('product created',data);
+      // console.log('product created',data);
       this.products.unshift(data);
       // this.products.push(data);
       // this.toggleProductDetail();
