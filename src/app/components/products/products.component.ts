@@ -18,7 +18,13 @@ export class ProductsComponent  {
   @Input() products: Product[] = [];
   today = new Date();
   date = new Date(2021,1,20);
-
+  @Input()
+    set productId(id: string | null) {
+      if (id) {
+        this.onShowDetail(id);
+      }
+    }
+  // @Input() productId: string | null = null;
   @Output() loadMore: EventEmitter<string> = new EventEmitter();
 
   showProductDetail = false;
@@ -64,11 +70,12 @@ export class ProductsComponent  {
 
   onShowDetail(id: string){
     this.statusDetail = 'loading';
+    if (!this.showProductDetail) {
+      this.showProductDetail = true;
+    }
     // this.toggleProductDetail();
     this.productsService.getProduct(id)
     .subscribe(data => {
-      // console.log('product',data);
-      this.toggleProductDetail();
       this.productChosen = data;
       this.statusDetail = 'success';
     }, errorMesg => {
