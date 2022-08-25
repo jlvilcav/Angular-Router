@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { StoreService } from "../../services/store.service";
-import { AuthService } from "../../services/auth.service";
-import { CategoriesService } from "../../services/categories.service";
-import { User } from "../../models/user.model";
-import { Category } from "../../models/category.model";
+import { StoreService } from "../../../services/store.service";
+import { AuthService } from "../../../services/auth.service";
+import { CategoriesService } from "../../../services/categories.service";
+import { User } from "../../../models/user.model";
+import { Category } from "../../../models/category.model";
 import { switchMap } from 'rxjs/operators';
 
 @Component({
