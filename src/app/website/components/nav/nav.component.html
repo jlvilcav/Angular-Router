@@ -36,7 +36,9 @@
     <div class="info">
       <div class="account">
         <button *ngIf="!profile; else elseblock" (click)="login()">Login</button>
-        <ng-template #elseblock>{{profile?.email}}</ng-template>
+        <ng-template #elseblock>
+          <a routerLink="/profile">{{profile?.email}}</a>
+        </ng-template>
       </div>
       <div class="">
         <a href="">
