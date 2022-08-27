@@ -32,6 +32,10 @@ export class NavComponent implements OnInit {
       this.counter = products.length;
     });
     this.getAllCategories();
+    this.authService.user$
+    .subscribe(data => {
+      this.profile = data;
+    });
   }
 
   toggleMenu(){
@@ -40,15 +44,16 @@ export class NavComponent implements OnInit {
 
   login(){
     this.authService.loginAndGet( 'john@mail.com','changeme')
-    .subscribe(profile=> {
-      this.profile = profile;
+    .subscribe(()=> {
+      this.router.navigate(['/home']);
     });
   }
 
   getAllCategories(){
     this.categoriesService.getAll()
-    .subscribe(data => {
+    .subscribe(data=> {
       this.categories = data;
+      // this.router.navigate(['/home']);
     });
   }
 
